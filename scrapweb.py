@@ -37,13 +37,11 @@ with open('company_data.csv', 'r', encoding='UTF8') as f:
             res_name = name.find('a')
             # result_name = res_name.text
             result_name = res_name.text #.encode("utf-8")
-            company_name.append(result_name)
             mylist[i + 1][1] = result_name
     
             #image
             image = main_content.find('img')
             src = image.get('src')
-            company_image.append(src)
             mylist[i + 1][2] = src
 
             #address
@@ -58,13 +56,11 @@ with open('company_data.csv', 'r', encoding='UTF8') as f:
             mylist[i + 1][4] = tel
             #extend section
             extend = address[3].text
-            company_extentsection.append(extend)
             mylist[i + 1][5] = extend
     
             #other
             other_thing = j.find('div', class_='textquangcao')
             others = other_thing.text 
-            other.append(others)
             mylist[i + 1][6] = others
 
 
@@ -74,7 +70,6 @@ with open('company_data.csv', 'r', encoding='UTF8') as f:
         if i < 35:
             link = j.find('a')
             href_email = link.get('href')
-            email.append(href_email)
             mylist[i+ 1][7] = href_email
     
     #web
@@ -82,11 +77,10 @@ with open('company_data.csv', 'r', encoding='UTF8') as f:
     for i, j in enumerate(webs):
         if i < 35:
             link_web = j.find('a')
-            href_web = link_web.get('href')
-            web.append(href_web)   
+            href_web = link_web.get('href')  
             mylist[i + 1][8] = href_web
     f.close()
-print(mylist)
+
 with open('scrapwebdata.csv', 'w', encoding='UTF8') as t:
     writer = csv.writer(t)
     writer.writerows(mylist)
